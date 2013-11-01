@@ -23,6 +23,7 @@ public class RetrieveLocation extends Activity {
     int size = 0;
     List<ScanResult> results;
     ArrayList<HashMap<String, Integer>> signals = new ArrayList<HashMap<String, Integer>>();
+    TextView t;
 
     /**
      * Called when the activity is first created.
@@ -32,7 +33,7 @@ public class RetrieveLocation extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        TextView t = (TextView) findViewById(R.id.notif);
+        t = (TextView) findViewById(R.id.notif);
 
         wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         if (wifi.isWifiEnabled() == false)
@@ -46,8 +47,47 @@ public class RetrieveLocation extends Activity {
             @Override
             public void onReceive(Context c, Intent intent)
             {
+                t.setText("Found location...");
                 results = wifi.getScanResults();
                 size = results.size();
+
+                try
+                {
+                    size = size - 1;
+                    while (size >= 0)
+                    {
+                        HashMap<String, Integer> item = new HashMap<String, Integer>();
+                        item.put(results.get(size).BSSID, results.get(size).level);
+                        System.err.println("SSID: " + item.get(results.get(size).BSSID));
+
+                        signals.add(item);
+                        size--;
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.err.println("Shit.");
+                }
+
+                t.setText("Joining room...");
+
+                JSONArray json_signals=new JSONArray();
+                for (Map<String, Integer> signal : signals) {
+                    JSONObject json_obj=new JSONObject();
+                    for (Map.Entry<String, Integer> entry : signal.entrySet()) {
+                        String ssid = entry.getKey();
+                        Integer strength = entry.getValue();
+                        try {
+                            json_obj.put(ssid,strength);
+                        } catch (JSONException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
+                    json_signals.put(json_obj);
+                }
+                t.setText(json_signals.toString());
+
             }
         }, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
 
@@ -55,42 +95,5 @@ public class RetrieveLocation extends Activity {
         wifi.startScan();
 
         t.setText("Scanning...");
-        try
-        {
-            size = size - 1;
-            while (size >= 0)
-            {
-                HashMap<String, Integer> item = new HashMap<String, Integer>();
-                item.put(results.get(size).BSSID, results.get(size).level);
-                System.err.println(item.get(results.get(size).BSSID));
-
-                signals.add(item);
-                size--;
-            }
-        }
-        catch (Exception e)
-        {
-            System.err.println("Shit.");
-        }
-
-        t.setText("Joining room...");
-
-        JSONArray json_signals=new JSONArray();
-        for (Map<String, Integer> signal : signals) {
-            JSONObject json_obj=new JSONObject();
-            for (Map.Entry<String, Integer> entry : signal.entrySet()) {
-                String ssid = entry.getKey();
-                Integer strength = entry.getValue();
-                try {
-                    json_obj.put(ssid,strength);
-                } catch (JSONException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-            json_signals.put(json_obj);
-        }
-        t.setText(json_signals.toString());
-
     }
 }
