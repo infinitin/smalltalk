@@ -1,14 +1,24 @@
 package com.example.SmallTalk;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.*;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,6 +33,11 @@ public class Chat extends Activity {
     private Button sendMessageButton;
     private ArrayList<String> messageHistory;
     private ArrayAdapter<String> messageHistoryAdapter;
+    private boolean whiteBackground = true;
+    private Map<String, Integer> hashtagCount = new HashMap<String, Integer>();
+    private String firstTag = "";
+    private String secondTag = "";
+    private String thirdTag = "";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,19 +47,102 @@ public class Chat extends Activity {
         messageText = (EditText) findViewById(R.id.message);
         sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
         messageHistory = new ArrayList<String>();
+        hashtagCount.put("", 0);
 
-        messageHistoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , messageHistory);
+        messageHistoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked , messageHistory);
         messageHistoryView.setAdapter(messageHistoryAdapter);
+        new DownloadMessages().execute();
 
         sendMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                messageHistory.add(messageText.getText().toString());
+                String message = messageText.getText().toString();
+                countHashtags(message);
+                messageHistory.add(message);
+                whiteBackground = !whiteBackground;
                 messageHistoryAdapter.notifyDataSetChanged();
                 messageText.setText("");
                 messageHistoryView.setSelection(messageHistoryAdapter.getCount() - 1);
+
+
                 //TODO: SEND TO SERVER (with id?)
             }
         });
+    }
+
+    private void countHashtags(String message) {
+        Matcher matcher = Pattern.compile("#\\s*(\\w+)").matcher(message);
+        while (matcher.find()) {
+            String tag = matcher.group(1);
+            if(hashtagCount.get(tag) == null)
+                hashtagCount.put(tag, 1);
+            else
+                hashtagCount.put(tag, hashtagCount.get(tag) + 1);
+            checkTopHashtags(tag);
+        }
+        showTopTags();
+    }
+
+    private void checkTopHashtags(String tag) {
+        int count = hashtagCount.get(tag);
+
+        if(count > hashtagCount.get(firstTag)) {
+            thirdTag = secondTag;
+            secondTag = firstTag;
+            firstTag = tag;
+        } else if(count > hashtagCount.get(secondTag)) {
+            thirdTag = secondTag;
+            secondTag = tag;
+        } else if(count > hashtagCount.get(thirdTag)) {
+            thirdTag = tag;
+        }
+    }
+
+    private void showTopTags() {
+        TextView firstView = (TextView) findViewById(R.id.top_1);
+        firstView.setText("#" + firstTag);
+        TextView secondView = (TextView) findViewById(R.id.top_2);
+        secondView.setText("#" + secondTag);
+        TextView thirdView = (TextView) findViewById(R.id.top_3);
+        thirdView.setText("#" + thirdTag);
+    }
+
+    private class DownloadMessages extends AsyncTask<Void, Void, String> {
+
+        protected String doInBackground(Void... nothing) {
+            String message = null;
+            try {
+                HttpParams params = new BasicHttpParams();
+                HttpClient httpClient = new DefaultHttpClient(params);
+
+                //prepare the HTTP GET call
+                HttpGet httpget = new HttpGet("http://matphillips.com/st/receive.php");
+                //get the response entity
+                HttpEntity entity = httpClient.execute(httpget).getEntity();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return message;
+        }
+
+        protected void onPostExecute(String response) {
+            //this.execute();
+            try {
+                JSONArray jsonArray = new JSONArray(response.trim());
+                if(jsonArray != null) {
+                    for(int i = 0 ; i < jsonArray.length() ; i++) {
+                        JSONObject object1 = (JSONObject) jsonArray.get(i);
+                        String message = object1.getString("m");
+                        messageHistory.add(message);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            messageHistoryAdapter.notifyDataSetChanged();
+
+        }
+
     }
 }
