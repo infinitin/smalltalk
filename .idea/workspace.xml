@@ -24,24 +24,21 @@
     </option>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ff760aa-0f0e-4436-808f-fe36f977f9e6" name="Default" comment="Basic layout for chat and a failed attempt at making an http post -.-">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" afterPath="$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" />
+    <list default="true" id="2ff760aa-0f0e-4436-808f-fe36f977f9e6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/chat.xml" afterPath="$PROJECT_DIR$/res/layout/chat.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main.xml" afterPath="$PROJECT_DIR$/res/layout/main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SmallTalk.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/main.xml" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383305859777" ignored="false" />
-    <file path="/Dummy.txt" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383337417816" ignored="false" />
+    <file path="/Dummy.txt" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383337443493" ignored="false" />
     <file path="/RetrieveLocation.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383326770042" ignored="false" />
     <file path="$PROJECT_DIR$/../Wilkinson_Hall_App/res/layout/main.xml" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383305851401" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383333274733" ignored="false" />
     <file path="/fragment.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383320251847" ignored="false" />
     <file path="$PROJECT_DIR$/src/Chat.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383326300617" ignored="false" />
     <file path="/Chat.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383330700066" ignored="false" />
-    <file path="/chat.xml" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383336809767" ignored="false" />
+    <file path="/chat.xml" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383337610041" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,10 +140,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Chat.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Chat.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="40" selection-start="1574" selection-end="1574" vertical-scroll-proportion="0.0">
+            <state line="43" column="40" selection-start="1574" selection-end="1574" vertical-scroll-proportion="0.6838843">
               <folding>
                 <element signature="e#1309#1735#0" expanded="true" />
                 <element signature="e#1724#1725#0" expanded="true" />
@@ -164,14 +161,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chat.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="chat.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/chat.xml">
-          <provider editor-type-id="text-editor">
-            <state line="2" column="44" selection-start="156" selection-end="156" vertical-scroll-proportion="-1.36">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="74" selection-start="1677" selection-end="1677" vertical-scroll-proportion="-4.24">
               <folding />
             </state>
           </provider>
-          <provider selected="true" editor-type-id="android-designer">
+          <provider editor-type-id="android-designer">
             <state />
           </provider>
         </entry>
@@ -316,7 +313,7 @@
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="preferences.pathVariables" />
-    <property name="AndroidLayoutSelectedEditor" value="android-designer" />
+    <property name="AndroidLayoutSelectedEditor" value="text-editor" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -519,7 +516,11 @@
       <created>1383331427805</created>
       <updated>1383331427805</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Top hashtags and using full width">
+      <created>1383337453638</created>
+      <updated>1383337453638</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -544,9 +545,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1448" y="-8" width="1456" height="916" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3292683" sideWeight="0.67193675" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.67193675" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855093" sideWeight="0.67193675" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32938075" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -564,7 +565,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23529412" sideWeight="0.67193675" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23529412" sideWeight="0.67193675" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32806325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -615,7 +616,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic layout for chat and a failed attempt at making an http post -.-" />
+    <option name="LAST_COMMIT_MESSAGE" value="Top hashtags and using full width" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -632,6 +633,7 @@
     <MESSAGE value="Initial commit with first attempt at getting wifi signals" />
     <MESSAGE value="BSSID and signal value put together into JSON format" />
     <MESSAGE value="Basic layout for chat and a failed attempt at making an http post -.-" />
+    <MESSAGE value="Top hashtags and using full width" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -748,24 +750,24 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/chat.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="74" selection-start="1677" selection-end="1677" vertical-scroll-proportion="-4.24">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="40" selection-start="1574" selection-end="1574" vertical-scroll-proportion="0.0">
+        <state line="43" column="40" selection-start="1574" selection-end="1574" vertical-scroll-proportion="0.6838843">
           <folding>
             <element signature="e#1309#1735#0" expanded="true" />
             <element signature="e#1724#1725#0" expanded="true" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/chat.xml">
-      <provider editor-type-id="text-editor">
-        <state line="2" column="44" selection-start="156" selection-end="156" vertical-scroll-proportion="-1.36">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
   </component>

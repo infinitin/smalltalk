@@ -6,8 +6,32 @@
     <LinearLayout android:orientation="horizontal"
                   android:layout_width="fill_parent"
                   android:layout_height="fill_parent"
+                  android:gravity="top"
+                  android:layout_weight="34" android:dividerPadding="2dp" android:focusable="false"
+                  android:paddingLeft="3dp" android:paddingRight="3dp">
+
+        <TextView android:textColor="#000000"
+                  android:id="@+id/title"
+                  android:text="SmallTalk"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:singleLine="true" android:clickable="true" android:textSize="20dp"/>
+        <TextView android:textColor="#000000"
+                  android:id="@+id/filter"
+                  android:text="Open"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:singleLine="true" android:gravity="right" android:textSize="25dp"/>
+
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
                   android:gravity="bottom"
-                  android:layout_weight="4.5" android:background="#727272">
+                  android:layout_weight="35" android:background="#727272" android:showDividers="middle"
+                  android:divider="#030303" android:dividerPadding="10dp">
 
         <TextView android:textColor="#000000"
                   android:id="@+id/top_1"
@@ -34,7 +58,7 @@
     </LinearLayout>
     <ListView   android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
+                android:layout_weight="9"
                 android:gravity="top"
                 android:editable="false"
                 android.clickable="true"
@@ -44,7 +68,7 @@
                   android:layout_width="fill_parent"
                   android:layout_height="fill_parent"
                   android:gravity="bottom"
-                  android:layout_weight="4">
+                  android:layout_weight="33">
 
         <EditText       android:id="@+id/message"
                         android:layout_width="fill_parent"
