@@ -7,8 +7,16 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,6 +94,7 @@ public class RetrieveLocation extends Activity {
                     }
                     json_signals.put(json_obj);
                 }
+                new SendWifiDataTask().execute(json_signals);
                 t.setText(json_signals.toString());
 
             }
@@ -96,4 +105,32 @@ public class RetrieveLocation extends Activity {
 
         t.setText("Scanning...");
     }
+
+    class SendWifiDataTask extends AsyncTask<JSONArray, Void, String> {
+
+        protected String doInBackground(JSONArray... json_signals) {
+            String resp = null;
+            try {
+                HttpPost httpPost = new HttpPost("http://matphillips.com/st/send.php");
+                StringEntity entity = new StringEntity(json_signals.toString(), HTTP.UTF_8);
+                entity.setContentType("application/json");
+                httpPost.setEntity(entity);
+                HttpClient client = new DefaultHttpClient();
+                HttpResponse response = client.execute(httpPost);
+                resp = response.toString();
+            } catch (Exception e) {
+                Log.e("HTTP", "Error in http connection " + e.toString());
+            }
+
+            // 11. return result
+            return resp;
+        }
+
+        protected void onPostExecute(String result) {
+            Intent intent = new Intent(RetrieveLocation.this, Chat.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
 }
