@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,13 +32,13 @@ public class Chat extends Activity {
     private EditText messageText;
     private ListView messageHistoryView;
     private Button sendMessageButton;
-    private ArrayList<String> messageHistory;
+    private ArrayList<String> messageHistory = new ArrayList<String>();
     private ArrayAdapter<String> messageHistoryAdapter;
-    private boolean whiteBackground = true;
     private Map<String, Integer> hashtagCount = new HashMap<String, Integer>();
     private String firstTag = "";
     private String secondTag = "";
     private String thirdTag = "";
+    private List<CharSequence> filters = new ArrayList<CharSequence>();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +47,9 @@ public class Chat extends Activity {
         messageHistoryView = (ListView) findViewById(R.id.messageHistoryView);
         messageText = (EditText) findViewById(R.id.message);
         sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
-        messageHistory = new ArrayList<String>();
         hashtagCount.put("", 0);
+
+        //filters.add("hello");
 
         messageHistoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked , messageHistory);
         messageHistoryView.setAdapter(messageHistoryAdapter);
@@ -56,18 +58,24 @@ public class Chat extends Activity {
         sendMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //messageHistoryAdapter.getFilter()
                 String message = messageText.getText().toString();
                 countHashtags(message);
                 messageHistory.add(message);
-                whiteBackground = !whiteBackground;
                 messageHistoryAdapter.notifyDataSetChanged();
                 messageText.setText("");
                 messageHistoryView.setSelection(messageHistoryAdapter.getCount() - 1);
 
 
+
                 //TODO: SEND TO SERVER (with id?)
             }
         });
+    }
+
+    private void filterByHashtag() {
+        for(CharSequence filter : filters)
+            Chat.this.messageHistoryAdapter.getFilter().filter("#");
     }
 
     private void countHashtags(String message) {

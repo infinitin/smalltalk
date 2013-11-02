@@ -11,16 +11,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -111,13 +110,37 @@ public class RetrieveLocation extends Activity {
         protected String doInBackground(JSONArray... json_signals) {
             String resp = null;
             try {
-                HttpPost httpPost = new HttpPost("http://matphillips.com/st/send.php");
-                StringEntity entity = new StringEntity(json_signals.toString(), HTTP.UTF_8);
-                entity.setContentType("application/json");
-                httpPost.setEntity(entity);
-                HttpClient client = new DefaultHttpClient();
-                HttpResponse response = client.execute(httpPost);
-                resp = response.toString();
+                String url = "http://matphillips.com/st/send.php";
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+                //add reuqest header
+                con.setRequestMethod("POST");
+
+                String urlParameters = "data=" + json_signals[0].toString();
+
+                // Send post request
+                con.setDoOutput(true);
+                DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+                wr.writeBytes(urlParameters);
+                wr.flush();
+                wr.close();
+
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                //print result
+                System.out.println(response.toString());
+
+
+
             } catch (Exception e) {
                 Log.e("HTTP", "Error in http connection " + e.toString());
             }

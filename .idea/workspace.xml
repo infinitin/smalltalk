@@ -24,24 +24,24 @@
     </option>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="INFO" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ff760aa-0f0e-4436-808f-fe36f977f9e6" name="Default" comment="Top bar, other layout fixes">
+    <list default="true" id="2ff760aa-0f0e-4436-808f-fe36f977f9e6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" afterPath="$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/chat.xml" afterPath="$PROJECT_DIR$/res/layout/chat.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java" afterPath="$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SmallTalk.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/main.xml" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383305859777" ignored="false" />
-    <file path="/Dummy.txt" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383347847027" ignored="false" />
-    <file path="/RetrieveLocation.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383326770042" ignored="false" />
+    <file path="/Dummy.txt" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383352425832" ignored="false" />
+    <file path="/RetrieveLocation.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383353640829" ignored="false" />
     <file path="$PROJECT_DIR$/../Wilkinson_Hall_App/res/layout/main.xml" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383305851401" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383333274733" ignored="false" />
-    <file path="/fragment.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383320251847" ignored="false" />
+    <file path="/fragment.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383352552939" ignored="false" />
     <file path="$PROJECT_DIR$/src/Chat.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383326300617" ignored="false" />
-    <file path="/Chat.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383347717698" ignored="false" />
+    <file path="/Chat.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383349378642" ignored="false" />
     <file path="/chat.xml" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383337610041" ignored="false" />
     <file path="$PROJECT_DIR$/../ShakespeareInsults/gen/com/infinitin/ShakespeareInsults/Manifest.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383345182410" ignored="false" />
     <file path="$PROJECT_DIR$/../ShakespeareInsults/gen/com/infinitin/ShakespeareInsults/R.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383345182410" ignored="false" />
@@ -61,7 +61,22 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" line="130" class="com.example.SmallTalk.Chat.DownloadMessages" package="com.example.SmallTalk">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" line="138" class="com.example.SmallTalk.Chat.DownloadMessages" package="com.example.SmallTalk">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java" line="139" class="com.example.SmallTalk.RetrieveLocation.SendWifiDataTask" package="com.example.SmallTalk">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -125,37 +140,36 @@
     <leaf>
       <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
-          <provider editor-type-id="text-editor">
-            <state line="9" column="34" selection-start="409" selection-end="409" vertical-scroll-proportion="-6.12">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="34" selection-start="409" selection-end="409" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
-          <provider selected="true" editor-type-id="android-designer">
+          <provider editor-type-id="android-designer">
             <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RetrieveLocation.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="RetrieveLocation.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="40" selection-start="1590" selection-end="1590" vertical-scroll-proportion="0.0">
+            <state line="148" column="0" selection-start="4882" selection-end="4882" vertical-scroll-proportion="0.33169532">
               <folding>
-                <element signature="e#1020#1046#0" expanded="true" />
-                <element signature="e#2044#2061#0" expanded="true" />
-                <element signature="e#3388#3389#0" expanded="true" />
+                <element signature="e#1466#3290#0" expanded="true" />
+                <element signature="e#3279#3280#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Chat.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Chat.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="87" column="0" selection-start="3084" selection-end="3084" vertical-scroll-proportion="0.92975205">
+            <state line="70" column="49" selection-start="2574" selection-end="2574" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#1139#1156#0" expanded="true" />
-                <element signature="e#1975#2537#0" expanded="true" />
-                <element signature="e#2526#2527#0" expanded="true" />
+                <element signature="e#1017#1025#0" expanded="true" />
+                <element signature="e#1144#1161#0" expanded="true" />
+                <element signature="e#1322#1336#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -173,7 +187,7 @@
       <file leaf-file-name="chat.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/chat.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="32" selection-start="1903" selection-end="1903" vertical-scroll-proportion="-3.4">
+            <state line="37" column="32" selection-start="1903" selection-end="1903" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -200,11 +214,11 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/res/layout/chat.xml" />
         <option value="$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java" />
       </list>
     </option>
   </component>
@@ -240,6 +254,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -310,8 +326,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -329,22 +343,22 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager" selected="Android Application.SmallTalk">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
       <option name="filePath" />
       <option name="scope" value="ALL" />
       <option name="testName" />
-      <method />
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
-      <option name="PROGRAM_PARAMETERS" />
       <method />
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -373,19 +387,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -411,6 +412,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -533,7 +547,11 @@
       <created>1383338292895</created>
       <updated>1383338292895</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Hashtag rankings and detection">
+      <created>1383347915075</created>
+      <updated>1383347915075</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -560,28 +578,28 @@
     <frame x="-1448" y="-8" width="1456" height="916" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.67193675" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855093" sideWeight="0.67193675" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32938075" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.67193675" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39657444" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39657444" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="simpleUML" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32806325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32806325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32720104" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27140975" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23529412" sideWeight="0.67193675" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23457676" sideWeight="0.60342556" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32806325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.67193675" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855093" sideWeight="0.67193675" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -629,7 +647,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Top bar, other layout fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hashtag rankings and detection" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -648,6 +666,7 @@
     <MESSAGE value="Basic layout for chat and a failed attempt at making an http post -.-" />
     <MESSAGE value="Top hashtags and using full width" />
     <MESSAGE value="Top bar, other layout fixes" />
+    <MESSAGE value="Hashtag rankings and detection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -665,9 +684,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="125" column="0" selection-start="4165" selection-end="4165" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#1020#1046#0" expanded="true" />
-            <element signature="e#2044#2061#0" expanded="true" />
-            <element signature="e#3388#3389#0" expanded="true" />
+            <element signature="e#1466#3290#0" expanded="true" />
+            <element signature="e#3279#3280#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -693,9 +711,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="108" column="65" selection-start="3503" selection-end="3537" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#1020#1046#0" expanded="true" />
-            <element signature="e#2044#2061#0" expanded="true" />
-            <element signature="e#3388#3389#0" expanded="true" />
+            <element signature="e#1466#3290#0" expanded="true" />
+            <element signature="e#3279#3280#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -744,12 +761,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
-      <provider editor-type-id="text-editor">
-        <state line="9" column="34" selection-start="409" selection-end="409" vertical-scroll-proportion="-6.12">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="34" selection-start="409" selection-end="409" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="android-designer">
+      <provider editor-type-id="android-designer">
         <state />
       </provider>
     </entry>
@@ -760,20 +777,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="40" selection-start="1590" selection-end="1590" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#1020#1046#0" expanded="true" />
-            <element signature="e#2044#2061#0" expanded="true" />
-            <element signature="e#3388#3389#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/chat.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="32" selection-start="1903" selection-end="1903" vertical-scroll-proportion="-3.4">
+        <state line="37" column="32" selection-start="1903" selection-end="1903" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -783,11 +789,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="0" selection-start="3084" selection-end="3084" vertical-scroll-proportion="0.92975205">
+        <state line="70" column="49" selection-start="2574" selection-end="2574" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#1139#1156#0" expanded="true" />
-            <element signature="e#1975#2537#0" expanded="true" />
-            <element signature="e#2526#2527#0" expanded="true" />
+            <element signature="e#1017#1025#0" expanded="true" />
+            <element signature="e#1144#1161#0" expanded="true" />
+            <element signature="e#1322#1336#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="148" column="0" selection-start="4882" selection-end="4882" vertical-scroll-proportion="0.33169532">
+          <folding>
+            <element signature="e#1466#3290#0" expanded="true" />
+            <element signature="e#3279#3280#0" expanded="true" />
           </folding>
         </state>
       </provider>
