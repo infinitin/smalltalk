@@ -2,6 +2,7 @@ package com.example.SmallTalk;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -53,8 +54,12 @@ public class Chat extends Activity {
 
         messageHistoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked , messageHistory);
         messageHistoryView.setAdapter(messageHistoryAdapter);
-        for(int i=0; i<50; i++) {
-            new DownloadMessages().execute();
+        for(int i=0; i<4; i++) {
+            DownloadMessages my_task = new DownloadMessages();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                my_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            else
+                my_task.execute();
         }
 
 
@@ -69,7 +74,11 @@ public class Chat extends Activity {
                 messageText.setText("");
                 messageHistoryView.setSelection(messageHistoryAdapter.getCount() - 1);
                 //TODO: Send with some id
-                new PostMessageTask().execute(message);
+                PostMessageTask my_task = new PostMessageTask();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                    my_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, message);
+                else
+                    my_task.execute(message);
             }
         });
     }
@@ -158,6 +167,7 @@ public class Chat extends Activity {
                         JSONObject object1 = (JSONObject) jsonArray.get(i);
                         String message = object1.getString("m");
                         messageHistory.add(message);
+                        countHashtags(message);
                     }
                 }
             } catch (Exception e) {
@@ -203,7 +213,7 @@ public class Chat extends Activity {
             } catch (Exception e) {
                 Log.e("HTTP", "Error in http connection " + e.toString());
             }
-            return response.toString();
+            return message[0];
         }
 
         protected void onPostExecute(String response) {
