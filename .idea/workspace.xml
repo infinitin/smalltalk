@@ -23,25 +23,21 @@
       </GlobalState>
     </option>
   </component>
-  <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="INFO" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="2ff760aa-0f0e-4436-808f-fe36f977f9e6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" afterPath="$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java" afterPath="$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SmallTalk.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/main.xml" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383305859777" ignored="false" />
-    <file path="/Dummy.txt" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383352425832" ignored="false" />
+    <file path="/Dummy.txt" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383353750131" ignored="false" />
     <file path="/RetrieveLocation.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383353640829" ignored="false" />
     <file path="$PROJECT_DIR$/../Wilkinson_Hall_App/res/layout/main.xml" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383305851401" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383333274733" ignored="false" />
     <file path="/fragment.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383352552939" ignored="false" />
     <file path="$PROJECT_DIR$/src/Chat.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383326300617" ignored="false" />
-    <file path="/Chat.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383349378642" ignored="false" />
+    <file path="/Chat.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383355851881" ignored="false" />
     <file path="/chat.xml" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383337610041" ignored="false" />
     <file path="$PROJECT_DIR$/../ShakespeareInsults/gen/com/infinitin/ShakespeareInsults/Manifest.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383345182410" ignored="false" />
     <file path="$PROJECT_DIR$/../ShakespeareInsults/gen/com/infinitin/ShakespeareInsults/R.java" changelist="2ff760aa-0f0e-4436-808f-fe36f977f9e6" time="1383345182410" ignored="false" />
@@ -61,7 +57,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" line="138" class="com.example.SmallTalk.Chat.DownloadMessages" package="com.example.SmallTalk">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" line="177" class="com.example.SmallTalk.Chat.PostMessageTask" package="com.example.SmallTalk">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -76,7 +72,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java" line="139" class="com.example.SmallTalk.RetrieveLocation.SendWifiDataTask" package="com.example.SmallTalk">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" line="172" class="com.example.SmallTalk.Chat.PostMessageTask" package="com.example.SmallTalk">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -141,7 +137,7 @@
       <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="34" selection-start="409" selection-end="409" vertical-scroll-proportion="0.0">
+            <state line="9" column="34" selection-start="409" selection-end="409" vertical-scroll-proportion="-0.34">
               <folding />
             </state>
           </provider>
@@ -150,10 +146,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RetrieveLocation.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="RetrieveLocation.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="148" column="0" selection-start="4882" selection-end="4882" vertical-scroll-proportion="0.33169532">
+            <state line="51" column="0" selection-start="1441" selection-end="1441" vertical-scroll-proportion="27.24">
               <folding>
                 <element signature="e#1466#3290#0" expanded="true" />
                 <element signature="e#3279#3280#0" expanded="true" />
@@ -165,11 +161,52 @@
       <file leaf-file-name="Chat.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="49" selection-start="2574" selection-end="2574" vertical-scroll-proportion="0.0">
+            <state line="72" column="0" selection-start="2581" selection-end="2581" vertical-scroll-proportion="-5.4">
               <folding>
-                <element signature="e#1017#1025#0" expanded="true" />
-                <element signature="e#1144#1161#0" expanded="true" />
-                <element signature="e#1322#1336#0" expanded="true" />
+                <element signature="e#929#937#0" expanded="true" />
+                <element signature="e#1056#1073#0" expanded="true" />
+                <element signature="e#1234#1248#0" expanded="true" />
+                <element signature="e#1996#2604#0" expanded="true" />
+                <element signature="e#2593#2594#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="View.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-17/android/view/View.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14400" column="0" selection-start="559987" selection-end="559987" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Handler.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-17/android/os/Handler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="100" column="0" selection-start="4112" selection-end="4112" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Looper.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-17/android/os/Looper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="156" column="0" selection-start="5538" selection-end="5538" vertical-scroll-proportion="0.33333334">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AsyncTask.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-17/android/os/AsyncTask.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="287" column="0" selection-start="12256" selection-end="12256" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#11944#12279#0" expanded="true" />
+                <element signature="e#12268#12269#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -217,8 +254,8 @@
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/res/layout/chat.xml" />
-        <option value="$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" />
         <option value="$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java" />
+        <option value="$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java" />
       </list>
     </option>
   </component>
@@ -551,7 +588,11 @@
       <created>1383347915075</created>
       <updated>1383347915075</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="POST working">
+      <created>1383353758269</created>
+      <updated>1383353758269</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -583,18 +624,18 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.67193675" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39657444" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39657444" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="simpleUML" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32806325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32720104" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32674572" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27140975" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23457676" sideWeight="0.60342556" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23457676" sideWeight="0.60342556" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32806325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.67193675" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -647,7 +688,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Hashtag rankings and detection" />
+    <option name="LAST_COMMIT_MESSAGE" value="POST working" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -667,6 +708,7 @@
     <MESSAGE value="Top hashtags and using full width" />
     <MESSAGE value="Top bar, other layout fixes" />
     <MESSAGE value="Hashtag rankings and detection" />
+    <MESSAGE value="POST working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -680,16 +722,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="0" selection-start="4165" selection-end="4165" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#1466#3290#0" expanded="true" />
-            <element signature="e#3279#3280#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="66" selection-start="551" selection-end="551" vertical-scroll-proportion="0.0">
@@ -731,16 +763,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-17/android/os/Handler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="0" selection-start="4112" selection-end="4112" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-17/android/os/Looper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="0" selection-start="5047" selection-end="5047" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-17/android/os/MessageQueue.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="52" column="24" selection-start="1853" selection-end="1853" vertical-scroll-proportion="0.33178654" />
@@ -762,19 +784,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="34" selection-start="409" selection-end="409" vertical-scroll-proportion="0.0">
+        <state line="9" column="34" selection-start="409" selection-end="409" vertical-scroll-proportion="-0.34">
           <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-17/android/os/AsyncTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="211" column="0" selection-start="9930" selection-end="9930" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/chat.xml">
@@ -787,24 +802,57 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="49" selection-start="2574" selection-end="2574" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#1017#1025#0" expanded="true" />
-            <element signature="e#1144#1161#0" expanded="true" />
-            <element signature="e#1322#1336#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/SmallTalk/RetrieveLocation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="0" selection-start="4882" selection-end="4882" vertical-scroll-proportion="0.33169532">
+        <state line="51" column="0" selection-start="1441" selection-end="1441" vertical-scroll-proportion="27.24">
           <folding>
             <element signature="e#1466#3290#0" expanded="true" />
             <element signature="e#3279#3280#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-17/android/os/AsyncTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="287" column="0" selection-start="12256" selection-end="12256" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#11944#12279#0" expanded="true" />
+            <element signature="e#12268#12269#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/SmallTalk/Chat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="0" selection-start="2581" selection-end="2581" vertical-scroll-proportion="-5.4">
+          <folding>
+            <element signature="e#929#937#0" expanded="true" />
+            <element signature="e#1056#1073#0" expanded="true" />
+            <element signature="e#1234#1248#0" expanded="true" />
+            <element signature="e#1996#2604#0" expanded="true" />
+            <element signature="e#2593#2594#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-17/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14400" column="0" selection-start="559987" selection-end="559987" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-17/android/os/Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="0" selection-start="4112" selection-end="4112" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-17/android/os/Looper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="156" column="0" selection-start="5538" selection-end="5538" vertical-scroll-proportion="0.33333334">
+          <folding />
         </state>
       </provider>
     </entry>

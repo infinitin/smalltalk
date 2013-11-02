@@ -3,17 +3,17 @@ package com.example.SmallTalk;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +53,10 @@ public class Chat extends Activity {
 
         messageHistoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked , messageHistory);
         messageHistoryView.setAdapter(messageHistoryAdapter);
-        new DownloadMessages().execute();
+        for(int i=0; i<50; i++) {
+            new DownloadMessages().execute();
+        }
+
 
         sendMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,10 +68,8 @@ public class Chat extends Activity {
                 messageHistoryAdapter.notifyDataSetChanged();
                 messageText.setText("");
                 messageHistoryView.setSelection(messageHistoryAdapter.getCount() - 1);
-
-
-
-                //TODO: SEND TO SERVER (with id?)
+                //TODO: Send with some id
+                new PostMessageTask().execute(message);
             }
         });
     }
@@ -120,13 +121,28 @@ public class Chat extends Activity {
         protected String doInBackground(Void... nothing) {
             String message = null;
             try {
-                HttpParams params = new BasicHttpParams();
-                HttpClient httpClient = new DefaultHttpClient(params);
 
-                //prepare the HTTP GET call
-                HttpGet httpget = new HttpGet("http://matphillips.com/st/receive.php");
-                //get the response entity
-                HttpEntity entity = httpClient.execute(httpget).getEntity();
+                String url = "http://matphillips.com/st/receive.php";
+
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+                // optional default is GET
+                con.setRequestMethod("GET");
+
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                //print result
+                message = response.toString();
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -134,7 +150,7 @@ public class Chat extends Activity {
         }
 
         protected void onPostExecute(String response) {
-            //this.execute();
+
             try {
                 JSONArray jsonArray = new JSONArray(response.trim());
                 if(jsonArray != null) {
@@ -149,7 +165,49 @@ public class Chat extends Activity {
             }
 
             messageHistoryAdapter.notifyDataSetChanged();
+            //this.execute();
+        }
 
+    }
+
+    private class PostMessageTask extends AsyncTask<String, Void, String> {
+
+        protected String doInBackground(String... message) {
+            StringBuffer response = new StringBuffer();
+            try {
+                String url = "http://matphillips.com/st/send.php";
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+                //add reuqest header
+                con.setRequestMethod("POST");
+
+                String urlParameters = "m=" + message;
+
+                // Send post request
+                con.setDoOutput(true);
+                DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+                wr.writeBytes(urlParameters);
+                wr.flush();
+                wr.close();
+
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+            } catch (Exception e) {
+                Log.e("HTTP", "Error in http connection " + e.toString());
+            }
+            return response.toString();
+        }
+
+        protected void onPostExecute(String response) {
+            System.out.println(response);
         }
 
     }
