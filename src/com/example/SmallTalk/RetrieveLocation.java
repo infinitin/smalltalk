@@ -11,6 +11,8 @@ import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,6 +46,7 @@ public class RetrieveLocation extends Activity {
         progress = new ProgressDialog(this);
         progress.setTitle("Scanning");
         progress.show();
+        progress.getWindow().setGravity(Gravity.BOTTOM);
         // To dismiss the dialog
 
         wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
