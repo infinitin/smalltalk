@@ -98,7 +98,6 @@ public class Chat extends Activity {
                 hashtagCount.put(tag, hashtagCount.get(tag) + 1);
             checkTopHashtags(tag);
         }
-        showTopTags();
     }
 
     private void checkTopHashtags(String tag) {
@@ -114,15 +113,6 @@ public class Chat extends Activity {
         } else if(count > hashtagCount.get(thirdTag)) {
             thirdTag = tag;
         }
-    }
-
-    private void showTopTags() {
-        TextView firstView = (TextView) findViewById(R.id.top_1);
-        firstView.setText("#" + firstTag);
-        TextView secondView = (TextView) findViewById(R.id.top_2);
-        secondView.setText("#" + secondTag);
-        TextView thirdView = (TextView) findViewById(R.id.top_3);
-        thirdView.setText("#" + thirdTag);
     }
 
     private class DownloadMessages extends AsyncTask<Void, Void, String> {
@@ -175,7 +165,6 @@ public class Chat extends Activity {
             }
 
             messageHistoryAdapter.notifyDataSetChanged();
-            //this.execute();
         }
 
     }
