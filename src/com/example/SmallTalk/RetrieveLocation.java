@@ -1,6 +1,7 @@
 package com.example.SmallTalk;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +11,8 @@ import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
+import android.view.Gravity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,10 +29,10 @@ import java.util.Map;
 
 public class RetrieveLocation extends Activity {
     WifiManager wifi;
+    ProgressDialog progress;
     int size = 0;
     List<ScanResult> results;
     ArrayList<HashMap<String, Integer>> signals = new ArrayList<HashMap<String, Integer>>();
-    TextView t;
     WifiReceiver wifiReceiver = new WifiReceiver();
 
     /**
@@ -41,12 +43,16 @@ public class RetrieveLocation extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        t = (TextView) findViewById(R.id.notif);
+        progress = new ProgressDialog(this);
+        progress.setTitle("Scanning");
+        progress.show();
+        progress.getWindow().setGravity(Gravity.BOTTOM);
+        // To dismiss the dialog
 
         wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         if (wifi.isWifiEnabled() == false)
         {
-            t.setText("Enabling Wifi...");
+            progress.setMessage("Enabling Wifi...");
             wifi.setWifiEnabled(true);
         }
 
@@ -55,14 +61,14 @@ public class RetrieveLocation extends Activity {
         signals.clear();
         wifi.startScan();
 
-        t.setText("Scanning...");
+        progress.setMessage("Scanning");
     }
 
     class WifiReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context c, Intent intent)
         {
-            t.setText("Found location...");
+        	progress.setMessage("Found location...");
             results = wifi.getScanResults();
             size = results.size();
 
@@ -84,7 +90,7 @@ public class RetrieveLocation extends Activity {
                 System.err.println("Shit.");
             }
 
-            t.setText("Joining room...");
+            progress.setMessage("Joining room...");
 
             JSONArray json_signals=new JSONArray();
             for (Map<String, Integer> signal : signals) {
@@ -102,7 +108,7 @@ public class RetrieveLocation extends Activity {
                 json_signals.put(json_obj);
             }
             new SendWifiDataTask().execute(json_signals);
-            t.setText(json_signals.toString());
+            progress.setMessage(json_signals.toString());
         }
     }
 
@@ -151,6 +157,8 @@ public class RetrieveLocation extends Activity {
         }
 
         protected void onPostExecute(String result) {
+        	progress.dismiss();
+        	
             Intent intent = new Intent(RetrieveLocation.this, Chat.class);
             unregisterReceiver(wifiReceiver);
             startActivity(intent);
