@@ -1,26 +1,20 @@
 package com.example.SmallTalk;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import org.jivesoftware.smack.*;
+import org.jivesoftware.smack.packet.Message;
+import org.jivesoftware.smackx.muc.DiscussionHistory;
+import org.jivesoftware.smackx.muc.InvitationListener;
+import org.jivesoftware.smackx.muc.MultiUserChat;
+import org.jivesoftware.smackx.muc.RoomInfo;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,184 +24,138 @@ import java.util.regex.Pattern;
  * To change this template use File | Settings | File Templates.
  */
 public class Chat extends Activity {
-    private EditText messageText;
-    private ListView messageHistoryView;
     private Button sendMessageButton;
-    private ArrayList<String> messageHistory = new ArrayList<String>();
-    private ArrayAdapter<String> messageHistoryAdapter;
-    private Map<String, Integer> hashtagCount = new HashMap<String, Integer>();
-    private String firstTag = "";
-    private String secondTag = "";
-    private String thirdTag = "";
-    private List<CharSequence> filters = new ArrayList<CharSequence>();
+    private EditText messageText;
+    private TextView num_viewers;
+
+    private String host = "ejabberd.ro.lt";
+    private int port = 5222;
+    private boolean SASLAuth = true;
+    protected Connection conn;
+
+    private MultiUserChat muc;
+    private Connection muc_conn;
+    private String muc_room;
+    //We can allow the user to set all of these in their own settings if we want.
+    private int historyTime = 60;
+    private int historyLength = 10;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
 
-        messageHistoryView = (ListView) findViewById(R.id.messageHistoryView);
-        messageText = (EditText) findViewById(R.id.message);
-        sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
-        hashtagCount.put("", 0);
+        SmackAndroid.init(this);
 
-        //filters.add("hello");
+        new XMPPConnect(this).execute();
+    }
 
-        messageHistoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked , messageHistory);
-        messageHistoryView.setAdapter(messageHistoryAdapter);
-        for(int i=0; i<4; i++) {
-            DownloadMessages my_task = new DownloadMessages();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                my_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            else
-                my_task.execute();
-        }
-
-
-        sendMessageButton.setOnClickListener(new View.OnClickListener() {
+    protected void MUCConnect() {
+        MultiUserChat.addInvitationListener(conn, new InvitationListener() {
             @Override
-            public void onClick(View v) {
-                //messageHistoryAdapter.getFilter()
-                String message = messageText.getText().toString();
-                countHashtags(message);
-                messageHistory.add(message);
-                messageHistoryAdapter.notifyDataSetChanged();
-                messageText.setText("");
-                messageHistoryView.setSelection(messageHistoryAdapter.getCount() - 1);
-                //TODO: Send with some id
-                PostMessageTask my_task = new PostMessageTask();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                    my_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, message);
-                else
-                    my_task.execute(message);
+            public void invitationReceived(Connection connection, String s, String s2, String s3, String s4, Message message) {
+                //s is the room, s2 is the inviter, s3 is the reason, s4 is the password
+                muc_conn = connection;
+                muc_room = s;
+                muc = new MultiUserChat(muc_conn, muc_room);
+                DiscussionHistory history = new DiscussionHistory();
+                history.setMaxStanzas(historyLength);
+                history.setSeconds(historyTime);
+                try {
+                    muc.join("sm", s4, history, SmackConfiguration.getPacketReplyTimeout());
+                    //TODO: Fill screen with the messages found from history
+                } catch (XMPPException e) {
+                    System.err.println("FAILED TO JOIN ROOM");
+                }
+
+                sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
+                messageText = (EditText) findViewById(R.id.message);
+
+                sendMessageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String message = messageText.getText().toString();
+                        messageText.setText("");
+                        try {
+                            muc.sendMessage(message);
+                        } catch (XMPPException e) {
+                            System.err.println("FAILED TO SEND MESSAGE");
+                        }
+                    }
+                });
+
+                RoomInfo roomInfo = null;
+                try {
+                    roomInfo = MultiUserChat.getRoomInfo(muc_conn, muc_room);
+                } catch (XMPPException e) {
+                    System.err.println("FAILED TO GET ROOM INFO");
+                }
+                num_viewers = (TextView) findViewById(R.id.num_viewers);
+                num_viewers.setText(roomInfo != null ? Integer.toString(roomInfo.getOccupantsCount()) : "0");
+
+                muc_conn.getChatManager().addChatListener(new MUCManagerListener());
+
             }
         });
     }
 
-    private void filterByHashtag() {
-        for(CharSequence filter : filters)
-            Chat.this.messageHistoryAdapter.getFilter().filter("#");
-    }
+    private class MUCManagerListener implements ChatManagerListener {
+        @Override
+        public void chatCreated(org.jivesoftware.smack.Chat chat, boolean b) {
+            chat.addMessageListener(new MessageListener(){
 
-    private void countHashtags(String message) {
-        Matcher matcher = Pattern.compile("#\\s*(\\w+)").matcher(message);
-        while (matcher.find()) {
-            String tag = matcher.group(1);
-            if(hashtagCount.get(tag) == null)
-                hashtagCount.put(tag, 1);
-            else
-                hashtagCount.put(tag, hashtagCount.get(tag) + 1);
-            checkTopHashtags(tag);
-        }
-    }
-
-    private void checkTopHashtags(String tag) {
-        int count = hashtagCount.get(tag);
-
-        if(count > hashtagCount.get(firstTag)) {
-            thirdTag = secondTag;
-            secondTag = firstTag;
-            firstTag = tag;
-        } else if(count > hashtagCount.get(secondTag)) {
-            thirdTag = secondTag;
-            secondTag = tag;
-        } else if(count > hashtagCount.get(thirdTag)) {
-            thirdTag = tag;
-        }
-    }
-
-    private class DownloadMessages extends AsyncTask<Void, Void, String> {
-
-        protected String doInBackground(Void... nothing) {
-            String message = null;
-            try {
-
-                String url = "http://matphillips.com/st/receive.php";
-
-                URL obj = new URL(url);
-                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-                // optional default is GET
-                con.setRequestMethod("GET");
-
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(con.getInputStream()));
-                String inputLine;
-                StringBuffer response = new StringBuffer();
-
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
+                @Override
+                public void processMessage(org.jivesoftware.smack.Chat chat, Message message) {
+                    System.out.println("NEW MESSAGE: " + message.getBody());
                 }
-                in.close();
+            });
+        }
+    }
 
-                //print result
-                message = response.toString();
 
-            } catch (Exception e) {
+    private class XMPPConnect extends AsyncTask<Void, Integer, Connection> {
+        private ProgressDialog progress;
+
+        XMPPConnect(Activity activity) {
+            progress = new ProgressDialog(activity);
+        }
+
+        protected void onPreExecute() {
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progress.setIndeterminate(true);
+            progress.setMessage("Joining epic conversation");
+            progress.show();
+        }
+
+        protected Connection doInBackground(Void... nothing) {
+
+            ConnectionConfiguration config = new ConnectionConfiguration(host, port);
+            config.setSASLAuthenticationEnabled(SASLAuth);
+            Connection xmppConn = new XMPPConnection(config);
+            try {
+                xmppConn.connect();
+            } catch (XMPPException e) {
                 e.printStackTrace();
             }
-            return message;
-        }
-
-        protected void onPostExecute(String response) {
-
             try {
-                JSONArray jsonArray = new JSONArray(response.trim());
-                if(jsonArray != null) {
-                    for(int i = 0 ; i < jsonArray.length() ; i++) {
-                        JSONObject object1 = (JSONObject) jsonArray.get(i);
-                        String message = object1.getString("m");
-                        messageHistory.add(message);
-                        countHashtags(message);
-                    }
-                }
-            } catch (Exception e) {
+                xmppConn.login("smalltalk", "jabber");
+                //conn.loginAnonymously();
+            } catch (XMPPException e) {
                 e.printStackTrace();
             }
 
-            messageHistoryAdapter.notifyDataSetChanged();
+
+
+            return xmppConn;
         }
 
-    }
-
-    private class PostMessageTask extends AsyncTask<String, Void, String> {
-
-        protected String doInBackground(String... message) {
-            StringBuffer response = new StringBuffer();
-            try {
-                String url = "http://matphillips.com/st/send.php";
-                URL obj = new URL(url);
-                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-                //add reuqest header
-                con.setRequestMethod("POST");
-
-                String urlParameters = "m=" + message;
-
-                // Send post request
-                con.setDoOutput(true);
-                DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-                wr.writeBytes(urlParameters);
-                wr.flush();
-                wr.close();
-
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(con.getInputStream()));
-                String inputLine;
-
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
-
-            } catch (Exception e) {
-                Log.e("HTTP", "Error in http connection " + e.toString());
+        protected void onPostExecute(Connection result) {
+            if (progress.isShowing()) {
+                progress.dismiss();
             }
-            return message[0];
-        }
 
-        protected void onPostExecute(String response) {
-            System.out.println(response);
+            conn = result;
+            MUCConnect();
         }
-
     }
 }
+

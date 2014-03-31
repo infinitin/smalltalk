@@ -138,7 +138,7 @@ public class RetrieveLocation extends Activity {
                 in.close();
 
                 //print result
-                System.out.println(response.toString());
+                System.err.println("RESPONSE:" + response.toString());
 
 
 
@@ -152,8 +152,8 @@ public class RetrieveLocation extends Activity {
 
         protected void onPostExecute(String result) {
             Intent intent = new Intent(RetrieveLocation.this, Chat.class);
-            startActivity(intent);
             unregisterReceiver(wifiReceiver);
+            startActivity(intent);
             finish();
         }
     }
