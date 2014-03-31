@@ -12,6 +12,7 @@ import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smackx.muc.DiscussionHistory;
 import org.jivesoftware.smackx.muc.InvitationListener;
 import org.jivesoftware.smackx.muc.MultiUserChat;
+import org.jivesoftware.smackx.muc.RoomInfo;
 
 import java.util.ArrayList;
 
@@ -95,20 +96,17 @@ public class Chat extends Activity {
                     }
                 });
 
-                try {
-                    num_viewers.setText(Integer.toString(muc.getParticipants().size()));
-                } catch (XMPPException e) {
-                    e.printStackTrace();
-                }
-
                 muc.addParticipantListener(new PacketListener() {
                     @Override
                     public void processPacket(Packet packet) {
+                        RoomInfo roomInfo = null;
                         try {
-                            num_viewers.setText(Integer.toString(muc.getParticipants().size()));
+                            roomInfo = MultiUserChat.getRoomInfo(muc_conn, muc_room);
                         } catch (XMPPException e) {
-                            e.printStackTrace();
+                            System.err.println("FAILED TO GET ROOM INFO");
                         }
+                        num_viewers = (TextView) findViewById(R.id.num_viewers);
+                        num_viewers.setText(roomInfo != null ? Integer.toString(roomInfo.getOccupantsCount()) : "0");
                     }
                 });
 
