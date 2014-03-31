@@ -5,15 +5,15 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.*;
 import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.packet.Message;
+import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smackx.muc.DiscussionHistory;
 import org.jivesoftware.smackx.muc.InvitationListener;
 import org.jivesoftware.smackx.muc.MultiUserChat;
-import org.jivesoftware.smackx.muc.RoomInfo;
+
+import java.util.ArrayList;
 
 
 /**
@@ -24,9 +24,14 @@ import org.jivesoftware.smackx.muc.RoomInfo;
  * To change this template use File | Settings | File Templates.
  */
 public class Chat extends Activity {
+    private Activity activity;
+
     private Button sendMessageButton;
     private EditText messageText;
     private TextView num_viewers;
+    private ListView messageHistoryView;
+    private ArrayList<String> messageHistory = new ArrayList<String>();
+    private ArrayAdapter<String> messageHistoryAdapter;
 
     private String host = "ejabberd.ro.lt";
     private int port = 5222;
@@ -45,6 +50,16 @@ public class Chat extends Activity {
         setContentView(R.layout.chat);
 
         SmackAndroid.init(this);
+
+        activity = this;
+
+        messageHistoryView = (ListView) findViewById(R.id.messageHistoryView);
+        messageHistoryAdapter = new ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, messageHistory);
+        messageHistoryView.setAdapter(messageHistoryAdapter);
+
+        sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
+        messageText = (EditText) findViewById(R.id.message);
+        num_viewers = (TextView) findViewById(R.id.num_viewers);
 
         new XMPPConnect(this).execute();
     }
@@ -67,9 +82,6 @@ public class Chat extends Activity {
                     System.err.println("FAILED TO JOIN ROOM");
                 }
 
-                sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
-                messageText = (EditText) findViewById(R.id.message);
-
                 sendMessageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -83,16 +95,30 @@ public class Chat extends Activity {
                     }
                 });
 
-                RoomInfo roomInfo = null;
                 try {
-                    roomInfo = MultiUserChat.getRoomInfo(muc_conn, muc_room);
+                    num_viewers.setText(Integer.toString(muc.getParticipants().size()));
                 } catch (XMPPException e) {
-                    System.err.println("FAILED TO GET ROOM INFO");
+                    e.printStackTrace();
                 }
-                num_viewers = (TextView) findViewById(R.id.num_viewers);
-                num_viewers.setText(roomInfo != null ? Integer.toString(roomInfo.getOccupantsCount()) : "0");
 
-                muc_conn.getChatManager().addChatListener(new MUCManagerListener());
+                muc.addParticipantListener(new PacketListener() {
+                    @Override
+                    public void processPacket(Packet packet) {
+                        try {
+                            num_viewers.setText(Integer.toString(muc.getParticipants().size()));
+                        } catch (XMPPException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                muc.addMessageListener(new PacketListener() {
+                    @Override
+                    public void processPacket(Packet packet) {
+                        final Message message = (Message) packet;
+                        messageHistory.add(message.getBody());
+                    }
+                });
 
             }
         });
@@ -105,7 +131,10 @@ public class Chat extends Activity {
 
                 @Override
                 public void processMessage(org.jivesoftware.smack.Chat chat, Message message) {
-                    System.out.println("NEW MESSAGE: " + message.getBody());
+                    messageHistoryView = (ListView) findViewById(R.id.messageHistoryView);
+                    messageHistoryAdapter = new ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, messageHistory);
+                    messageHistoryView.setAdapter(messageHistoryAdapter);
+                    messageHistory.add(message.getBody());
                 }
             });
         }
