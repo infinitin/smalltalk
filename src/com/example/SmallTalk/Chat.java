@@ -2,8 +2,10 @@ package com.example.SmallTalk;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import org.jivesoftware.smack.*;
@@ -13,7 +15,14 @@ import org.jivesoftware.smackx.muc.DiscussionHistory;
 import org.jivesoftware.smackx.muc.InvitationListener;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 import org.jivesoftware.smackx.muc.RoomInfo;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -26,6 +35,7 @@ import java.util.ArrayList;
  */
 public class Chat extends Activity {
     private Activity activity;
+    protected String signals;
 
     private Button sendMessageButton;
     private EditText messageText;
@@ -38,6 +48,7 @@ public class Chat extends Activity {
     private int port = 5222;
     private boolean SASLAuth = true;
     protected Connection conn;
+    protected String user_id;
 
     private MultiUserChat muc;
     private Connection muc_conn;
@@ -52,6 +63,8 @@ public class Chat extends Activity {
 
         SmackAndroid.init(this);
 
+        Intent intent = getIntent();
+        signals = intent.getStringExtra("JSONSignals");
         activity = this;
 
         messageHistoryView = (ListView) findViewById(R.id.messageHistoryView);
@@ -62,7 +75,7 @@ public class Chat extends Activity {
         messageText = (EditText) findViewById(R.id.message);
         num_viewers = (TextView) findViewById(R.id.num_viewers);
 
-        new XMPPConnect(this).execute();
+        new XMPPConnect().execute();
     }
 
     protected void MUCConnect() {
@@ -77,7 +90,7 @@ public class Chat extends Activity {
                 history.setMaxStanzas(historyLength);
                 history.setSeconds(historyTime);
                 try {
-                    muc.join("sm", s4, history, SmackConfiguration.getPacketReplyTimeout());
+                    muc.join(user_id, s4, history, SmackConfiguration.getPacketReplyTimeout());
                     //TODO: Fill screen with the messages found from history
                 } catch (XMPPException e) {
                     System.err.println("FAILED TO JOIN ROOM");
@@ -142,7 +155,7 @@ public class Chat extends Activity {
     private class XMPPConnect extends AsyncTask<Void, Integer, Connection> {
         private ProgressDialog progress;
 
-        XMPPConnect(Activity activity) {
+        XMPPConnect() {
             progress = new ProgressDialog(activity);
         }
 
@@ -164,13 +177,13 @@ public class Chat extends Activity {
                 e.printStackTrace();
             }
             try {
-                xmppConn.login("smalltalk", "jabber");
-                //conn.loginAnonymously();
+                //xmppConn.login("smalltalk", "jabber");
+                xmppConn.loginAnonymously();
             } catch (XMPPException e) {
                 e.printStackTrace();
             }
 
-
+            user_id = xmppConn.getUser().substring(0, xmppConn.getUser().indexOf('@'));
 
             return xmppConn;
         }
@@ -182,6 +195,65 @@ public class Chat extends Activity {
 
             conn = result;
             MUCConnect();
+            new SendWifiDataTask().execute();
+        }
+    }
+
+    class SendWifiDataTask extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog progress;
+
+        SendWifiDataTask() {
+            progress = new ProgressDialog(activity);
+        }
+
+        protected void onPreExecute() {
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progress.setIndeterminate(true);
+            progress.setMessage("Getting json signals");
+            progress.show();
+        }
+
+        protected Void doInBackground(Void... x) {
+            try {
+                JSONArray signals_only = new JSONArray(signals);
+                JSONObject json_signals = new JSONObject();
+                json_signals.put(user_id, signals_only);
+
+                String url = "http://matphillips.com/st/send.php";
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+                //add reuqest header
+                con.setRequestMethod("POST");
+
+                String urlParameters = "data=" + json_signals.toString();
+
+                // Send post request
+                con.setDoOutput(true);
+                DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+                wr.writeBytes(urlParameters);
+                wr.flush();
+                wr.close();
+
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+            } catch (Exception e) {
+                Log.e("HTTP", "Error in http connection " + e.toString());
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(Void x) {
+            progress.dismiss();
         }
     }
 }
