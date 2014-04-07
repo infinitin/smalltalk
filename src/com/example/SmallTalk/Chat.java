@@ -53,7 +53,7 @@ public class Chat extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
-
+        
         progress = new ProgressDialog(this);
         progress.setTitle("Scanning");
         progress.show();
@@ -175,9 +175,13 @@ public class Chat extends Activity {
         } catch (Exception e) {
             System.err.println("FAILED TO GET ROOM INFO");
         }
+        
         num_viewers = (TextView) findViewById(R.id.num_viewers);
         num_viewers.setText(roomInfo != null ? Integer.toString(roomInfo.getOccupantsCount()) : "1");
 
+        TextView title = (TextView) findViewById(R.id.title);
+        title.setText(muc_room);
+        
         progress.dismiss();
     }
 
@@ -215,9 +219,13 @@ public class Chat extends Activity {
         @Override
         public void processPacket(Packet packet) {
             final Message message = (Message) packet;
-            messageHistory.add(message.getBody());
-            messageHistoryAdapter.notifyDataSetChanged();
-            messageHistoryView.invalidateViews();
+        	runOnUiThread(new Runnable(){
+                public void run(){
+                    messageHistory.add(message.getBody());
+                    messageHistoryAdapter.notifyDataSetChanged();
+                    messageHistoryView.invalidateViews();
+                }
+            });
         }
     }
 }
