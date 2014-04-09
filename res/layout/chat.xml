@@ -7,7 +7,7 @@
                   android:layout_width="fill_parent"
                   android:layout_height="fill_parent"
                   android:gravity="top"
-                  android:background="#EEC591"
+                  android:background="#c591ee"
                   android:layout_weight="34" android:dividerPadding="2dp" android:focusable="false"
                   android:paddingLeft="3dp" android:paddingRight="3dp">
 
