@@ -334,4 +334,11 @@ public class Chat extends Activity {
             });
         }
     }
+
+    @Override
+    public void onDestroy(){
+        muc.leave();
+        conn.disconnect();
+        super.onDestroy();
+    }
 }
