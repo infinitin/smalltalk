@@ -277,19 +277,6 @@ public class Chat extends Activity {
         muc.addParticipantListener(new ParticipantListener());
         muc.addMessageListener(new MessageListener());
 
-        // This fails when it shouldn't.
-        // We should only need to check for an XMPPException but I can't figure out how to stop it from failing.
-        // So I just catch it for now.
-        RoomInfo roomInfo = null;
-        try {
-            roomInfo = MultiUserChat.getRoomInfo(muc_conn, muc_room);
-        } catch (Exception e) {
-            System.err.println("FAILED TO GET ROOM INFO");
-        }
-        
-        num_viewers = (TextView) findViewById(R.id.num_viewers);
-        num_viewers.setText(roomInfo != null ? Integer.toString(roomInfo.getOccupantsCount()) : "1");
-
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(muc_room.substring(0, muc_room.indexOf("@")));
         
@@ -318,7 +305,7 @@ public class Chat extends Activity {
             RoomInfo roomInfo = null;
             try {
                 roomInfo = MultiUserChat.getRoomInfo(muc_conn, muc_room);
-            } catch (Exception e) {
+            } catch (XMPPException e) {
                 System.err.println("FAILED TO GET ROOM INFO");
             }
             final String occupants = roomInfo != null ? Integer.toString(roomInfo.getOccupantsCount()) : "1";
@@ -340,7 +327,7 @@ public class Chat extends Activity {
                     messageHistory.add(message.getBody());
                     messageHistoryAdapter.notifyDataSetChanged();
                     messageHistoryView.invalidateViews();
-                    if (messageHistoryView.getLastVisiblePosition() >= messageHistoryAdapter.getCount() - 3) {
+                    if (messageHistoryView.getLastVisiblePosition() >= messageHistoryAdapter.getCount() - 3 || messageHistoryView.getFirstVisiblePosition() <= 1) {
                         messageHistoryView.setSelection(messageHistoryAdapter.getCount() - 1);
                     }
                 }
