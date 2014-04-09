@@ -341,6 +341,7 @@ public class Chat extends Activity {
                     messageHistory.add(message.getBody());
                     messageHistoryAdapter.notifyDataSetChanged();
                     messageHistoryView.invalidateViews();
+                    messageHistoryView.setSelection(messageHistoryAdapter.getCount() - 1);
                 }
             });
         }
