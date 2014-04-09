@@ -33,7 +33,6 @@ import java.util.*;
 public class Chat extends Activity {
     WifiManager wifi;
     ProgressDialog progress;
-    int size = 0;
     List<ScanResult> results;
     ArrayList<HashMap<String, Integer>> signals = new ArrayList<HashMap<String, Integer>>();
     WifiReceiver wifiReceiver = new WifiReceiver();
@@ -77,7 +76,7 @@ public class Chat extends Activity {
         num_viewers = (TextView) findViewById(R.id.num_viewers);
 
         wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        if (wifi.isWifiEnabled() == false)
+        if (!wifi.isWifiEnabled())
         {
             progress.setMessage("Enabling Wifi...");
             wifi.setWifiEnabled(true);
