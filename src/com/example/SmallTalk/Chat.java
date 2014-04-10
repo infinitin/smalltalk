@@ -1,11 +1,10 @@
 package com.example.SmallTalk;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.*;
+import android.net.ConnectivityManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
@@ -54,6 +53,8 @@ public class Chat extends Activity {
     private Connection muc_conn;
     private String muc_room = "";
 
+    AlertDialog connectionErrorDialog = null;
+
     /**
      * Called when the activity is first created.
      */
@@ -83,6 +84,9 @@ public class Chat extends Activity {
         }
 
         registerReceiver(wifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkStateReceiver, filter);
 
         signals.clear();
         wifi.startScan();
@@ -233,13 +237,16 @@ public class Chat extends Activity {
             Connection xmppConn = new XMPPConnection(config);
             try {
                 xmppConn.connect();
-            } catch (XMPPException e) {
+            } catch (Exception e) {
                 System.err.println("Failed to connect to smalltalk server");
+                return null;
             }
+
             try {
                 xmppConn.loginAnonymously();
             } catch (XMPPException e) {
                 System.err.println("Failed to login to smalltalk server anonymously");
+                return null;
             }
 
             user_id = xmppConn.getUser().substring(0, xmppConn.getUser().indexOf('@'));
@@ -248,9 +255,13 @@ public class Chat extends Activity {
         }
 
         protected void onPostExecute(Connection result) {
-            conn = result;
-            progress.setMessage("Joining epic conversation");
-            MUCConnect(3);
+            if (result == null){
+                showConnectionErrorDialog();
+            } else {
+                conn = result;
+                progress.setMessage("Joining epic conversation");
+                MUCConnect(3);
+            }
         }
     }
 
@@ -292,8 +303,9 @@ public class Chat extends Activity {
                 messageText.setText("");
                 try {
                     muc.sendMessage(message);
-                } catch (XMPPException e) {
+                } catch (Exception e) {
                     System.err.println("FAILED TO SEND MESSAGE");
+                    showConnectionErrorDialog();
                 }
             }
         }
@@ -332,6 +344,47 @@ public class Chat extends Activity {
                     }
                 }
             });
+        }
+    }
+
+    BroadcastReceiver networkStateReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            boolean noConnectivity = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
+
+            if (noConnectivity) {
+                showConnectionErrorDialog();
+            }
+        }
+    };
+
+    protected void showConnectionErrorDialog() {
+        if(connectionErrorDialog == null) {
+            connectionErrorDialog = new AlertDialog.Builder(this)
+                    .setTitle("No network connection")
+                    .setMessage("Please make sure you are connected to the Internet and try again")
+                    .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            progress.setMessage("Connecting to server...");
+                            progress.show();
+                            new XMPPConnect().execute();
+                            hideConnectionErrorDialog();
+                        }
+                    })
+                    .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .show();
+        }
+    }
+
+    protected void hideConnectionErrorDialog() {
+        if(connectionErrorDialog != null){
+            connectionErrorDialog.hide();
+            connectionErrorDialog = null;
         }
     }
 
