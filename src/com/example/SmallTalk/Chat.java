@@ -220,11 +220,25 @@ public class Chat extends Activity {
             Collections.sort(results, new Comparator<ScanResult>() {
                 @Override
                 public int compare(ScanResult lhs, ScanResult rhs) {
-                    return (lhs.level > rhs.level ? -1 : (lhs.level == rhs.level ? 0 : 1));
+                    return (round(lhs.level) > round(rhs.level) ? -1 : (round(lhs.level) == round(rhs.level) ? 0 : 1));
                 }
             });
 
-            return results.get(0).BSSID.replaceAll(":", "");
+            ScanResult max = results.get(0);
+            for (int i=1; i<results.size(); i++) {
+                if (results.get(i).level == max.level) {
+                    if(results.get(i).SSID.compareTo(max.SSID) < 0) {
+                        max = results.get(i);
+                    }
+                } else {
+                    break;
+                }
+            }
+
+            return max.BSSID.replaceAll(":", "");
+        }
+        private int round(int i){
+            return Math.round(i/10) * 10;
         }
     }
 
