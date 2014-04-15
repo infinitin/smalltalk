@@ -226,8 +226,8 @@ public class Chat extends Activity {
 
             ScanResult max = results.get(0);
             for (int i=1; i<results.size(); i++) {
-                if (results.get(i).level == max.level) {
-                    if(results.get(i).SSID.compareTo(max.SSID) < 0) {
+                if (round(results.get(i).level) == round(max.level)) {
+                    if(results.get(i).BSSID.compareTo(max.BSSID) < 0) {
                         max = results.get(i);
                     }
                 } else {
