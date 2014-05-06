@@ -304,8 +304,31 @@ public class Chat extends Activity {
 
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(muc_room.substring(0, muc_room.indexOf("@")));
+
+        // Get intent, action and MIME type
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type)) {
+                handleSendText(intent); // Handle text being sent
+            }
+        }
         
         progress.dismiss();
+    }
+
+    void handleSendText(Intent intent) {
+        String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+        if (sharedText != null) {
+            try {
+                muc.sendMessage(sharedText);
+            } catch (Exception e) {
+                System.err.println("FAILED TO SEND MESSAGE");
+                showConnectionErrorDialog();
+            }
+        }
     }
 
     class SendMessageClick implements View.OnClickListener {
